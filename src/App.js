@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
-import Project from './Components/Project';
 import Reservation from './Components/Reservation';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props){
     super();
-    this.state  = {mood:"Happy"}
+    this.state  = {}
   }
+  componentWillMount(){
+   this.getAllSeats();
+}
   render() {
-    return (
-      <div className="App">
-       <Reservation />
-      </div>
-    );
-  }
-  toggleMood = ()=> {
-      let m = (this.state.mood == "Happy")? "Sad" : "Happy";
-      this.setState({mood:m});    
+    let seats = this.state.seats;
+    console.log("seats");
+    console.log(seats);
+    let count = 0;
+            return (
+              <div className="App">
+              <Reservation seats={this.state.seats} />
+              </div>
+            );
+        
+}
+  getAllSeats = ()=> {
+    axios.get('http://localhost:9090/seat/')
+    .then(response =>  {    
+        //////////////problem here with setState (doesn't set state)
+                       this.setState({seats:response.data})
+                       console.log("11111111111111")
+
+                       } );
   }
 }
 
