@@ -8,11 +8,15 @@ class Reservation extends Component {
            
         }
     }
+    handleSubmit = ()=>{
+        console.log(this.refs.email.value);
+    }
     
   render() {
     console.log("this.props.seats");
     console.log(this.props.seats);
     if(this.props.seats){
+
 
         return (
         <div className="plane">
@@ -22,12 +26,18 @@ class Reservation extends Component {
         <div className="exit exit--front fuselage">
         
         </div>
+        <div className="userform" style={{paddingLeft:10 +"px"}}> 
+            <label>Name: </label><input ref="name" /><br />
+            <label>Email: </label> <input ref="email" /><br />
+            <label>Telephone: </label><input ref="telephone" /><br />
+        </div>
+       
         <ol className="cabin fuselage" type="A">
         {this.props.seats.map(seat =>{
             return <Seat key={uuid.v4()} seat={seat} /> 
         })
         }
-       
+       <button onClick={this.handleSubmit}>Submit</button>
         </ol>
     <div className="exit exit--back fuselage">
         

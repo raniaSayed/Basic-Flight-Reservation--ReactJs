@@ -83,26 +83,26 @@ ol {
   padding: 5px;
   position: relative;
 }
-.seat:nth-child(3) {
+/* .seat:nth-child(3) {
   margin-right: 14.28571428571429%;
-}
-.seat input[type=checkbox] {
+} */
+.seat input[type=radio] {
   position: absolute;
   opacity: 0;
 }
-.seat input[type=checkbox]:checked + label {
+.seat input[type=radio]:radio + label {
   background: #bada55;
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
   animation-duration: 300ms;
   animation-fill-mode: both;
 }
-.seat input[type=checkbox]:disabled + label {
+.seat input[type=radio]:disabled + label {
   background: #dddddd;
   text-indent: -9999px;
   overflow: hidden;
 }
-.seat input[type=checkbox]:disabled + label:after {
+.seat input[type=radio]:disabled + label:after {
   content: "X";
   text-indent: 0;
   position: absolute;
@@ -110,7 +110,7 @@ ol {
   left: 50%;
   transform: translate(-50%, 0%);
 }
-.seat input[type=checkbox]:disabled + label:hover {
+.seat input[type=radio]:disabled + label:hover {
   box-shadow: none;
   cursor: not-allowed;
 }

@@ -8,69 +8,50 @@ class Seat extends Component {
            
         }
     }
-    /*getAllSeats = ()=> {
-       let seats =  axios.get('http://localhost:9090/seat/')
-          .then(response => (response.data).map(element => {
-              return <label>{element._id}</label>
-          })
-        );
-        return seats;
-    }*/
-    componentWillMount(){
-        // axios.get('http://localhost:9090/seat/')
-        //      .then(response =>  {    
-        //          //////////////problem here with setState (doesn't set state)
-        //                         this.setState({Seats:response.data})
-        //                         console.log("11111111111111")
-
-        //                         } );
+    reserveSeat = ()=>{
+        let seatData =  {
+            "email":"rania@gmail.com",
+            "telephone":"00131000780",
+            "name":"rania",
+            "seat_number":"1A",
+            "ticket_id":19
+          }
+        axios.post('http://localhost:9090/reservation/',seatData)
+        .then(response =>  {    
+            //////////////problem here with setState (doesn't set state)
+                           
+                           console.log(response.data)
+    
+                           } );
     }
 
     render() {
-        console.log("222222222222222")
-
-        console.log(this.state);
-   //     let seats = this.props.seats;
-        // if(seats){
-        //     let count = 0;
-        //  return (
-
-            
-        //     seats.map(seat =>{
+      
                 let seat = this.props.seat;
                 let count =parseInt(seat._id.charAt(0));
+                let style = {
+                    float:'left',
+                    width:16+"%"
+                }
 
                 if(seat.available == false){
                     
                     return (
-                        <li className="seat"  width="16%">
-                            <input type="checkbox" disabled id="{seat._id}" />
+                        <li className="seat"  style={style}>
+                            <input type="radio" disabled key={seat._id} />
                             <label htmlFor={seat._id}>{seat._id}</label>
                          </li>
                          );
                 }else{
                     return (
 
-                        <li className="seat"  width="16%">
-                        <input type="checkbox" id="{seat._id}" />
+                        <li onClick={this.reserveSeat} className="seat"  style={style}>
+                        <input type="radio" key={seat._id} />
                         <label htmlFor={seat._id}>{seat._id}</label>
                      </li>
 
                     );
                 }
-        //  })
-        //  );
-        // }else{
-        //     return (
-        //         <div> Loading....</div>
-        //     );
-       // }
-        //  {this.state.Seats.map(seat =>{
-        //     return (
-        //    <button  key={seat._id}>{seat._id}</button>
-        //     );
-        //  })}
-
     }
 }
 
