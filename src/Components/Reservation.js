@@ -10,7 +10,7 @@ class Reservation extends Component {
         this.seat= "";
         this.changeSeat = this.changeSeat.bind(this);
     }
-    handleSubmit = ()=>{
+    handleSubmit = (event)=>{
         var email = this.refs.email.value;
         var name = this.refs.name.value;
         var telephone = this.refs.telephone.value;
@@ -20,16 +20,22 @@ class Reservation extends Component {
                 "email":email,
                 "telephone":telephone,
                 "name":name,
-                "seat_number":this.state.selected
+                "seat_number":this.seat
             }
             axios.post('http://localhost:9090/reservation/',seatData)
             .then(response =>  {
+                // this.forceUpdate();
+
+              if(response.data.error){
+                event.preventDefault();
+              }
+                
                // if(response.errorCode)
             } );
     
     }
     changeSeat = (e)=>{
-        console.log("1111111111111111111111111111111111111133");         
+        //problem with setState
        // this.setState({selected:e.target.value});
        this.seat = e.target.value;
     } 
@@ -48,6 +54,7 @@ class Reservation extends Component {
         <div className="exit exit--front fuselage">
         
         </div>
+        <form onSubmit={this.handleSubmit}>
         <div className="userform" style={{paddingLeft:10 +"px"}}> 
             <label>Name: </label><input ref="name" /><br />
             <label>Email: </label> <input ref="email" /><br />
@@ -59,8 +66,11 @@ class Reservation extends Component {
             return <Seat key={uuid.v4()} seat={seat} OnChangeSeat= {this.changeSeat} /> 
         })
         }
-       <button onClick={this.handleSubmit}>Submit</button>
+       {/* <button onClick={this.handleSubmit}>Submit</button> */}
         </ol>
+        <input type="submit" value="Save" />
+        </form>
+
     <div className="exit exit--back fuselage">
         
     </div>
