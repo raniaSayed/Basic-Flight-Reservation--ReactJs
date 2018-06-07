@@ -85,10 +85,7 @@ class Reservation extends Component {
     </div>
     </div>
 
-<hr />
-
-<div>
-        <h1>Empty Seats </h1>
+{/* <div style={{float:'right'}}>
         <div className="plane">
         <div className="cockpit">
         <h1>Empty Seats</h1>
@@ -105,10 +102,13 @@ class Reservation extends Component {
         }
          <br />
         </ol>
+        <div className="exit exit--back fuselage">
+        
+        </div>
+    </div>
+    </div> */}
+    <div style={{float:'center'}}>
 
-    </div>
-    </div>
-    <div>
         <div className="plane">
         <div className="cockpit">
         <h1>Reserved Seats</h1>
@@ -117,7 +117,7 @@ class Reservation extends Component {
         
         </div>
         <ol className="cabin fuselage" type="A">
-        {this.emptySeats.map(seat =>{
+        {this.reservedSeats.map(seat =>{
           
             return <Seat key={uuid.v4()} seat={seat} reserved={true}  /> 
         })
@@ -125,7 +125,9 @@ class Reservation extends Component {
         }
          <br />
         </ol>
-
+        <div className="exit exit--back fuselage">
+        
+        </div>
     </div>
     </div>
     </div>
