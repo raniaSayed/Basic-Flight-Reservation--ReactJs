@@ -7,31 +7,31 @@ class Reservation extends Component {
         super();
         this.state ={
         }
+        this.seat= "";
+        this.changeSeat = this.changeSeat.bind(this);
     }
     handleSubmit = ()=>{
         var email = this.refs.email.value;
         var name = this.refs.name.value;
         var telephone = this.refs.telephone.value;
-        //send request with data to api
-        //
+        
+
             let seatData =  {
                 "email":email,
                 "telephone":telephone,
                 "name":name,
-                "seat_number":"1A"////////////////////get seat number from seat component
+                "seat_number":this.state.selected
             }
             axios.post('http://localhost:9090/reservation/',seatData)
-            .then(response =>  {    
-                //////////////problem here with setState (doesn't set state)
-                               
-                               console.log(this.refs)
-                            //   this.forceUpdate();
-        
-                               } );
+            .then(response =>  {
+               // if(response.errorCode)
+            } );
     
     }
-    changeSeat = (selected_seat_value)=>{
-        this.setState({selected_seat:selected_seat_value})
+    changeSeat = (e)=>{
+        console.log("1111111111111111111111111111111111111133");         
+       // this.setState({selected:e.target.value});
+       this.seat = e.target.value;
     } 
     
   render() {

@@ -5,12 +5,15 @@ class Seat extends Component {
     constructor(props){
         super();
         this.state ={
-           
         }
     }
-    handleLangChange = () => {
-        var seat_id = this.refs.seat_id.value;
-        this.props.OnChangeSeat(seat_id);            
+    handleSeatChange = (e) => {
+        this.setState({selected: e.target.value});
+
+        console.log("0000000000000000000000000000")
+        var seat_id = e.target.value;
+        // e.target.checked =  !e.target.checked;
+        this.props.OnChangeSeat( e);            
     }
    
     render() {
@@ -26,17 +29,19 @@ class Seat extends Component {
                     return (
                         <li className="seat"  style={style}>
                             <input type="radio" disabled key={seat._id} />
-                            <label htmlFor={seat._id}>{seat._id}</label>
+                            <label>{seat._id}</label>
                          </li>
                          );
                 }else{
                     return (
 
-                        <li className="seat"  style={style}>
-                        <input type="radio" ref="seat_id" key={seat._id} value={seat._id} 
-                            checked={this.state.selected === seat._id} 
-                            // onChange={(e) =>  selected_seat = e.target.value }
-                            onChange={this.handleLangChange} />
+                         <li className="seat"  style={style}>
+                       {/* <li  style={style}> */}
+                        <input type="radio"  ref={seat._id} id={seat._id} name="seat_id" key={seat._id} value={seat._id} 
+                   //     checked={this.state.selected === seat._id} 
+                         onChange={(e) => this.handleSeatChange(e)}
+                            // onChange={(e) => this.handleSeatChange(e)}
+                        />
                         <label htmlFor={seat._id}>{seat._id}</label>
                      </li>
                     );
