@@ -9,6 +9,7 @@ class App extends Component {
   }
   componentWillMount(){
    this.getAllSeats();
+   this.getAllReservations();
 }
   render() {
     let seats = this.state.seats;
@@ -17,7 +18,7 @@ class App extends Component {
     let count = 0;
             return (
               <div className="App">
-              <Reservation seats={this.state.seats} />
+              <Reservation seats={this.state.seats} reservations={this.state.reservations} />
               </div>
             );
         
@@ -33,6 +34,17 @@ class App extends Component {
 
                        } );
   }
-}
 
+  getAllReservations = ()=> {
+  axios.get('http://localhost:9090/reservation/')
+  .then(response =>  {    
+      //////////////problem here with setState (doesn't set state)
+                     this.setState({reservations:response.data})
+                     if(response.data){
+                     console.log("11111111111111")
+                     }
+
+                     } );
+}
+}
 export default App;

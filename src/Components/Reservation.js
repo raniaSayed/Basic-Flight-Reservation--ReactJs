@@ -41,11 +41,29 @@ class Reservation extends Component {
        // this.setState({selected:e.target.value});
        this.seat = e.target.value;
     } 
-    
+   
   render() {
     console.log("this.props.seats");
     console.log(this.props.seats);
-    if(this.props.seats){
+    let reservations ;
+    if(this.props.reservations){
+        reservations = this.props.reservations.map(reserv =>{
+            return(
+                <div className="plane cabin fuselage" >
+                <br />
+                <br />
+                <br />
+                   <h4><label> Name: </label>{reserv.name}</h4>
+                     <h4><label>Email: </label> {reserv.email}</h4>
+                   <h4><label> Telephone: </label>{reserv.telephone}</h4>
+                     <h4><label>Ticket ID:</label>{reserv.ticket_id}</h4>
+                </div>
+
+            );
+
+        })
+    }
+    if(this.props.seats && this.props.reservations){
 
 
         return (
@@ -85,28 +103,6 @@ class Reservation extends Component {
     </div>
     </div>
 
-{/* <div style={{float:'right'}}>
-        <div className="plane">
-        <div className="cockpit">
-        <h1>Empty Seats</h1>
-        </div>
-        <div className="exit exit--front fuselage">
-        
-        </div>
-        <ol className="cabin fuselage" type="A">
-        {this.emptySeats.map(seat =>{
-          
-            return <Seat key={uuid.v4()} seat={seat} empty={true}  /> 
-        })
-       
-        }
-         <br />
-        </ol>
-        <div className="exit exit--back fuselage">
-        
-        </div>
-    </div>
-    </div> */}
     <div style={{float:'center'}}>
 
         <div className="plane">
@@ -129,6 +125,19 @@ class Reservation extends Component {
         
         </div>
     </div>
+    </div>
+    <br />
+
+    <div>
+    
+    
+
+        List of reservations
+        <div>
+            {reservations}
+        
+        
+        </div>
     </div>
     </div>
 
