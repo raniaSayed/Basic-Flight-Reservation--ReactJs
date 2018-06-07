@@ -24,7 +24,29 @@ class Seat extends Component {
                     float:'left',
                     width:16+"%"
                 }
-                if(seat.available == false){
+                if (this.props.reserved == true){
+                    return (
+
+                    <li className="seat"  style={style}>
+                     <input type="radio"  ref={seat._id} id={seat._id} name="seat_id" key={seat._id} value={seat._id} 
+                      onChange={(e) => this.handleSeatChange(e)}
+                     />
+                     <label htmlFor={seat._id}>{seat._id}</label>
+                  </li>
+                    );
+                }
+                if (this.props.empty == true){
+                    return (
+
+                    <li className="seat"  style={style}>
+                     <input type="radio"  ref={seat._id} id={seat._id} name="seat_id" key={seat._id} value={seat._id} 
+                      onChange={(e) => this.handleSeatChange(e)}
+                     />
+                     <label htmlFor={seat._id}>{seat._id}</label>
+                  </li>
+                    );
+                }
+                else if(seat.available == false){
                     
                     return (
                         <li className="seat"  style={style}>
@@ -32,7 +54,7 @@ class Seat extends Component {
                             <label>{seat._id}</label>
                          </li>
                          );
-                }else{
+                }else if(seat.available == true){
                     return (
 
                          <li className="seat"  style={style}>

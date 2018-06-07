@@ -8,6 +8,8 @@ class Reservation extends Component {
         this.state ={
         }
         this.seat= "";
+        this.reservedSeats = [];
+        this.emptySeats = [];
         this.changeSeat = this.changeSeat.bind(this);
     }
     handleSubmit = (event)=>{
@@ -47,6 +49,7 @@ class Reservation extends Component {
 
 
         return (
+            <div>
         <div className="plane">
         <div className="cockpit">
         <h1>Please select a seat</h1>
@@ -63,10 +66,16 @@ class Reservation extends Component {
        
         <ol className="cabin fuselage" type="A">
         {this.props.seats.map(seat =>{
+            console.log(seat.available)
+            if(seat.available == false)this.reservedSeats.push(seat);
+            else this.emptySeats.push(seat);
             return <Seat key={uuid.v4()} seat={seat} OnChangeSeat= {this.changeSeat} /> 
         })
         }
-       {/* <button onClick={this.handleSubmit}>Submit</button> */}
+        {
+            console.log("ssssssssssssss")}
+            
+            {console.log(this.reservedSeats)}
         </ol>
         <input type="submit" value="Save" />
         </form>
@@ -75,6 +84,52 @@ class Reservation extends Component {
         
     </div>
     </div>
+
+<hr />
+
+<div>
+        <h1>Empty Seats </h1>
+        <div className="plane">
+        <div className="cockpit">
+        <h1>Empty Seats</h1>
+        </div>
+        <div className="exit exit--front fuselage">
+        
+        </div>
+        <ol className="cabin fuselage" type="A">
+        {this.emptySeats.map(seat =>{
+          
+            return <Seat key={uuid.v4()} seat={seat} empty={true}  /> 
+        })
+       
+        }
+         <br />
+        </ol>
+
+    </div>
+    </div>
+    <div>
+        <div className="plane">
+        <div className="cockpit">
+        <h1>Reserved Seats</h1>
+        </div>
+        <div className="exit exit--front fuselage">
+        
+        </div>
+        <ol className="cabin fuselage" type="A">
+        {this.emptySeats.map(seat =>{
+          
+            return <Seat key={uuid.v4()} seat={seat} reserved={true}  /> 
+        })
+       
+        }
+         <br />
+        </ol>
+
+    </div>
+    </div>
+    </div>
+
         );
     }
     return null;

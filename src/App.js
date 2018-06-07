@@ -27,7 +27,9 @@ class App extends Component {
     .then(response =>  {    
         //////////////problem here with setState (doesn't set state)
                        this.setState({seats:response.data})
+                       if(response.data){
                        console.log("11111111111111")
+                       }
 
                        } );
   }
