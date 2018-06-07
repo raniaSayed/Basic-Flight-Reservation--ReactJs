@@ -1,16 +1,38 @@
 import React, { Component } from 'react';
 import Seat from '../Components/Seat';
 import uuid from 'uuid';
+import axios from 'axios';
 class Reservation extends Component {
     constructor(props){
         super();
         this.state ={
-           
         }
     }
     handleSubmit = ()=>{
-        console.log(this.refs.email.value);
+        var email = this.refs.email.value;
+        var name = this.refs.name.value;
+        var telephone = this.refs.telephone.value;
+        //send request with data to api
+        //
+            let seatData =  {
+                "email":email,
+                "telephone":telephone,
+                "name":name,
+                "seat_number":"1A"////////////////////get seat number from seat component
+            }
+            axios.post('http://localhost:9090/reservation/',seatData)
+            .then(response =>  {    
+                //////////////problem here with setState (doesn't set state)
+                               
+                               console.log(this.refs)
+                            //   this.forceUpdate();
+        
+                               } );
+    
     }
+    changeSeat = (selected_seat_value)=>{
+        this.setState({selected_seat:selected_seat_value})
+    } 
     
   render() {
     console.log("this.props.seats");
@@ -34,7 +56,7 @@ class Reservation extends Component {
        
         <ol className="cabin fuselage" type="A">
         {this.props.seats.map(seat =>{
-            return <Seat key={uuid.v4()} seat={seat} /> 
+            return <Seat key={uuid.v4()} seat={seat} OnChangeSeat= {this.changeSeat} /> 
         })
         }
        <button onClick={this.handleSubmit}>Submit</button>

@@ -90,7 +90,7 @@ ol {
   position: absolute;
   opacity: 0;
 }
-.seat input[type=radio]:radio + label {
+.seat input[type=radio]:checked + label {
   background: #bada55;
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
